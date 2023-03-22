@@ -1,0 +1,22 @@
+# Build files
+build
+
+# Patch files
+*.patch
+
+# images for documentation
+# dot files
+.*
+!.gitignore
+
+# Gradle files
+!build.gradle.kts
+!settings.gradle.kts
+!gradle.properties
+gradle
+.gradle
+gradlew
+gradlew.bat
+
+# IntelliJ Idea files
+.idea
