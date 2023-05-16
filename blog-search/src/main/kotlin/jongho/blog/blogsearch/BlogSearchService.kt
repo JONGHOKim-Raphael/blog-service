@@ -25,16 +25,16 @@ class BlogSearchService : BlogSearchApi {
     @GetMapping("/search")
     fun showBlogsByKeyword(
         @Parameter(name = "검색할 키워드") @RequestParam("query", required = true) query: String,
-        @Parameter(name = "검색결과 정렬방식") @RequestParam("sort", required = false, defaultValue = defaultSortByToString) sort: BlogSearchApiSortBy = defaultSortBy,
-        @Parameter(name = "검색결과 페이지 번호") @RequestParam("page", required = false, defaultValue = defaultPage.toString()) page: Int = defaultPage,
-        @Parameter(name = "검색결과 페이지당 결과개수") @RequestParam("size", required = false, defaultValue = defaultSize.toString()) size: Int = defaultSize) : ResponseEntity<String> {
+        @Parameter(name = "검색결과 정렬방식") @RequestParam("pageSortMethod", required = false, defaultValue = defaultPageSortMethodToString) pageSortMethod: BlogSearchApiSortBy,
+        @Parameter(name = "검색결과 페이지 번호") @RequestParam("pageNumber", required = false, defaultValue = defaultPageNumber.toString()) pageNumber: Int,
+        @Parameter(name = "검색결과 페이지당 결과개수") @RequestParam("pageSize", required = false, defaultValue = defaultPageSize.toString()) pageSize: Int) : ResponseEntity<String> {
 
         try {
-            if (size < 1 || size > 50) {
+            if (pageSize < 1 || pageSize > 50) {
                 throw HttpBadRequestException("Parameter *size* should be integer and in the range of 1-50")
             }
 
-            if (page < 1 || page > 50) {
+            if (pageNumber < 1 || pageNumber > 50) {
                 throw HttpBadRequestException("Parameter *page* should be integer and in the range of 1-50")
             }
         }
@@ -44,7 +44,7 @@ class BlogSearchService : BlogSearchApi {
         }
 
         try {
-            val result = searchBlogsByKeyword(query, sort, page, size)
+            val result = searchBlogsByKeyword(query, pageSortMethod, pageNumber, pageSize)
 
             if (result == emptyBlogSearchResult)
                 return ResponseEntity.ok("검색어에 해당하는 결과가 없습니다.")
