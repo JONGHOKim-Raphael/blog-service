@@ -3,7 +3,7 @@ package jongho.blog.blogsearch.kakao
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import jongho.blog.blogsearch.BlogSearchApi
-import jongho.blog.blogsearch.BlogSortMethod
+import jongho.blog.blogsearch.data.BlogSortMethod
 
 import io.netty.handler.logging.LogLevel
 import jongho.blog.blogsearch.data.BlogSearchResult

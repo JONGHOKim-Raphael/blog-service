@@ -1,3 +1,8 @@
+/**
+ *   Implementation of a REST API service.
+ *
+ *   NOTE: Open API v3's `@Parameter` is buggy, so we do not use it.
+ */
 package jongho.blog.blogsearch
 
 import org.slf4j.Logger
@@ -5,13 +10,17 @@ import org.slf4j.LoggerFactory
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
 import jongho.blog.blogsearch.data.BlogSearchResult
+import jongho.blog.blogsearch.data.BlogSortMethod
 import jongho.blog.blogsearch.data.emptyBlogSearchResult
 import jongho.blog.blogsearch.exception.HttpBadRequestException
 import jongho.blog.blogsearch.exception.HttpInternalServerErrorException
 import jongho.blog.blogsearch.kakao.KakaoBlogSearchService
 
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RequestParam
 
 private val log : Logger = LoggerFactory.getLogger(BlogSearchService::class.java)
 
@@ -24,7 +33,7 @@ class BlogSearchService : BlogSearchApi {
     @GetMapping("/search")
     fun showBlogsByKeyword(
         @RequestParam("query", required = true) query: String,
-        @RequestParam("pageSortMethod", required = false, defaultValue = defaultBlogSortMethodToString) pageSortMethod: BlogSortMethod,
+        @RequestParam("blogSortMethod", required = false, defaultValue = defaultBlogSortMethodToString) blogSortMethod: BlogSortMethod,
         @RequestParam("pageNumber", required = false, defaultValue = defaultPageNumber.toString()) pageNumber: Int,
         @RequestParam("pageSize", required = false, defaultValue = defaultPageSize.toString()) pageSize: Int) : ResponseEntity<String> {
 
@@ -43,7 +52,7 @@ class BlogSearchService : BlogSearchApi {
         }
 
         try {
-            val result = searchBlogsByKeyword(query, pageSortMethod, pageNumber, pageSize)
+            val result = searchBlogsByKeyword(query, blogSortMethod, pageNumber, pageSize)
 
             if (result == emptyBlogSearchResult)
                 return ResponseEntity.ok("검색어에 해당하는 결과가 없습니다.")

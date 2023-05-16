@@ -80,20 +80,26 @@ shell 기반 CLI 툴인 curl 을 사용하여 요청을 보낸다.
 
 요청 예시1:
 ```shell
-curl -v -X GET "localhost:8080/v1/blog/search" \
+curl -X "GET" \
+"http://localhost:8080/v1/blog/search?query=house&blogSortMethod=accuracy"
+```
+
+요청 예시2:
+```shell
+curl -v -X GET "http://localhost:8080/v1/blog/search" \
  -H "Content-Type: application/x-www-form-urlencoded" \
  --data-urlencode "query=house"
 ```
 
-요청 예시2:
+요청 예시3:
 ```shell
 curl -v -X GET "localhost:8080/v1/blog/search/keyword/house" \
  --data "size=60"
 ```
 
-요청 예시2 의 경우, size가 50을 넘으므로 HTTP 400 Bad Request 가 반환될 것이다.
+요청 예시3 의 경우, size가 50을 넘으므로 HTTP 400 Bad Request 가 반환될 것이다.
 
-요청 예시3:
+요청 예시4:
 ```text
 curl -v -X GET "localhost:8080/v1/blog/search/keyword/my_house" \
 --data-urlencode "query=my_house" \
