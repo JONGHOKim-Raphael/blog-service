@@ -14,8 +14,10 @@ class BlogSearchServiceTest : FunSpec({
 
     test("잘못된 size 로 블로그 검색 요청할 때") {
         val query = "집짓기"
-        val wrongSize = 60
-        val response = service.showBlogsByKeyword(query = query, pageSize = wrongSize)
+        val wrongPageSize = 60
+        val response = service.showBlogsByKeyword(
+            query = query, pageSize = wrongPageSize,
+            blogSortMethod = defaultBlogSortMethod, pageNumber = defaultPageNumber,)
 
         response.statusCode shouldBe HttpStatus.BAD_REQUEST
         response.body shouldContain "size"   // Error message is: "Bad Request. Parameter *size* should be integer and in the range of 1-50"
@@ -23,8 +25,10 @@ class BlogSearchServiceTest : FunSpec({
 
     test("잘못된 page 로 블로그 검색 요청할 때") {
         val query = "집짓기"
-        val wrongPage = -1
-        val response = service.showBlogsByKeyword(query = query, pageNumber = wrongPage)
+        val wrongPageNumber = -1
+        val response = service.showBlogsByKeyword(
+            query = query, pageNumber = wrongPageNumber,
+            blogSortMethod = defaultBlogSortMethod, pageSize = defaultPageSize)
 
         response.statusCode shouldBe HttpStatus.BAD_REQUEST
         response.body shouldContain "page"   // Error message is: "Bad Request. Parameter *page* should be integer and in the range of 1-50"
