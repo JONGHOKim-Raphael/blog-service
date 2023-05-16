@@ -3,7 +3,7 @@ package jongho.blog.blogsearch.kakao
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import jongho.blog.blogsearch.BlogSearchApi
-import jongho.blog.blogsearch.BlogSearchApiSortBy
+import jongho.blog.blogsearch.BlogSortMethod
 
 import io.netty.handler.logging.LogLevel
 import jongho.blog.blogsearch.data.BlogSearchResult
@@ -44,7 +44,7 @@ class KakaoBlogSearchService(
         _kakaoClient = kakaoClient
     }
 
-    override fun searchBlogsByKeyword(keyword: String, sort: BlogSearchApiSortBy, page: Int, size: Int): BlogSearchResult {
+    override fun searchBlogsByKeyword(keyword: String, sort: BlogSortMethod, page: Int, size: Int): BlogSearchResult {
         // Data for form request
         val formRequest: MultiValueMap<String, String> = LinkedMultiValueMap<String, String>()
         formRequest.add("query", keyword)

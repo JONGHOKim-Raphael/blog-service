@@ -3,7 +3,6 @@ package jongho.blog.blogsearch
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import io.swagger.v3.oas.annotations.Operation
-import io.swagger.v3.oas.annotations.Parameter
 import io.swagger.v3.oas.annotations.tags.Tag
 import jongho.blog.blogsearch.data.BlogSearchResult
 import jongho.blog.blogsearch.data.emptyBlogSearchResult
@@ -24,10 +23,10 @@ class BlogSearchService : BlogSearchApi {
     @Operation(summary = "블로그 검색", description = "키워드를 이용해 블로그를 검색합니다.")
     @GetMapping("/search")
     fun showBlogsByKeyword(
-        @Parameter(name = "검색할 키워드") @RequestParam("query", required = true) query: String,
-        @Parameter(name = "검색결과 정렬방식") @RequestParam("pageSortMethod", required = false, defaultValue = defaultPageSortMethodToString) pageSortMethod: BlogSearchApiSortBy,
-        @Parameter(name = "검색결과 페이지 번호") @RequestParam("pageNumber", required = false, defaultValue = defaultPageNumber.toString()) pageNumber: Int,
-        @Parameter(name = "검색결과 페이지당 결과개수") @RequestParam("pageSize", required = false, defaultValue = defaultPageSize.toString()) pageSize: Int) : ResponseEntity<String> {
+        @RequestParam("query", required = true) query: String,
+        @RequestParam("pageSortMethod", required = false, defaultValue = defaultBlogSortMethodToString) pageSortMethod: BlogSortMethod,
+        @RequestParam("pageNumber", required = false, defaultValue = defaultPageNumber.toString()) pageNumber: Int,
+        @RequestParam("pageSize", required = false, defaultValue = defaultPageSize.toString()) pageSize: Int) : ResponseEntity<String> {
 
         try {
             if (pageSize < 1 || pageSize > 50) {
@@ -59,10 +58,10 @@ class BlogSearchService : BlogSearchApi {
     @Operation(summary = "블로그 검색", description = "키워드를 이용해 블로그를 검색합니다. 첫 페이지 결과를 반환합니다.")
     @GetMapping("/search/keyword")
     fun showBlogsByKeyword(@RequestParam("query", required = true) query: String) : ResponseEntity<String> {
-        return showBlogsByKeyword(query, defaultPageSortMethod, defaultPageNumber, defaultPageSize)
+        return showBlogsByKeyword(query, defaultBlogSortMethod, defaultPageNumber, defaultPageSize)
     }
 
-    override fun searchBlogsByKeyword(query: String, sort: BlogSearchApiSortBy, page: Int, size: Int) : BlogSearchResult {
+    override fun searchBlogsByKeyword(query: String, sort: BlogSortMethod, page: Int, size: Int) : BlogSearchResult {
 
         // TODO: keyword 검색 기록 저장
 
