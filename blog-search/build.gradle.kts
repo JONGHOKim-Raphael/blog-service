@@ -18,7 +18,7 @@ dependencies {
     val kotestVersion = "5.5.5"
     testImplementation("io.kotest:kotest-runner-junit5:${kotestVersion}")
     testImplementation("io.kotest:kotest-assertions-core:${kotestVersion}")
-    testImplementation("io.kotest:kotest-extensions-mockserver:${kotestVersion}")
+//    testImplementation("io.kotest:kotest-extensions-mockserver:${kotestVersion}")
 
     val kotestSpringExtensionVersion = "1.1.2"
     testImplementation("io.kotest.extensions:kotest-extensions-spring:${kotestSpringExtensionVersion}")
