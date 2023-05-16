@@ -2,14 +2,14 @@ package jongho.blog.blogsearch
 
 import jongho.blog.blogsearch.data.BlogSearchResult
 
-val defaultSortMethod = BlogSearchApiSortBy.ACCURACY
+val defaultPageSortMethod = BlogSearchApiSortBy.ACCURACY
 const val defaultPageSortMethodToString = "ACCURACY"
 const val defaultPageNumber = 1
 const val defaultPageSize = 50
 
 interface BlogSearchApi {
     // If there is no result, returns empty object with totalCount=0. Never returns null
-    fun searchBlogsByKeyword(query: String, sort: BlogSearchApiSortBy = defaultSortMethod, page: Int = defaultPageNumber, size: Int = defaultPageSize): BlogSearchResult
+    fun searchBlogsByKeyword(query: String, sort: BlogSearchApiSortBy = defaultPageSortMethod, page: Int = defaultPageNumber, size: Int = defaultPageSize): BlogSearchResult
 }
 
 enum class BlogSearchApiSortBy (

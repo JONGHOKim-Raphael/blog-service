@@ -56,6 +56,12 @@ class BlogSearchService : BlogSearchApi {
         }
     }
 
+    @Operation(summary = "블로그 검색", description = "키워드를 이용해 블로그를 검색합니다. 첫 페이지 결과를 반환합니다.")
+    @GetMapping("/search/keyword")
+    fun showBlogsByKeyword(@RequestParam("query", required = true) query: String) : ResponseEntity<String> {
+        return showBlogsByKeyword(query, defaultPageSortMethod, defaultPageNumber, defaultPageSize)
+    }
+
     override fun searchBlogsByKeyword(query: String, sort: BlogSearchApiSortBy, page: Int, size: Int) : BlogSearchResult {
 
         // TODO: keyword 검색 기록 저장
