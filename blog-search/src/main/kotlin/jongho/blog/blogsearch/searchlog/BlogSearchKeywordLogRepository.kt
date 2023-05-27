@@ -7,5 +7,5 @@ interface BlogSearchKeywordLogRepository
 {
     fun findByKeyword(keyword: String): BlogSearchKeywordLog?
     fun findCountByKeyword(keyword: String): Int
-    fun findTop10ByOrderByCount(): List<BlogSearchKeywordLog>
+    fun findTop10ByOrderByCountDesc(): List<BlogSearchKeywordLog>
 }
