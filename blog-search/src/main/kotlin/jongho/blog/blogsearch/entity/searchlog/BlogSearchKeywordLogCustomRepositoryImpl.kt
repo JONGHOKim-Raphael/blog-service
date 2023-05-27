@@ -3,16 +3,16 @@
 //  - https://github.com/querydsl/querydsl/issues/3027
 //  - https://docs.spring.io/spring-boot/docs/2.7.9/reference/html/dependency-versions.html
 //  - https://stackoverflow.com/questions/73257636/using-hibernate-6-x-with-spring-boot-2-7-x-not-working
-package jongho.blog.blogsearch.searchlog
+package jongho.blog.blogsearch.entity.searchlog
 
 import com.querydsl.jpa.impl.JPAQueryFactory
 import jakarta.persistence.EntityManager
 import jakarta.persistence.PersistenceContext
 import org.springframework.beans.factory.annotation.Autowired
-
-// QueryDSL
-import jongho.blog.blogsearch.searchlog.QBlogSearchKeywordLog
 import org.springframework.transaction.annotation.Transactional
+
+// QueryDSL Q-Class
+import jongho.blog.blogsearch.entity.searchlog.QBlogSearchKeywordLog
 
 @Transactional
 class BlogSearchKeywordLogCustomRepositoryImpl (

@@ -15,7 +15,7 @@ import jongho.blog.blogsearch.dto.emptyBlogSearchResult
 import jongho.blog.blogsearch.exception.HttpBadRequestException
 import jongho.blog.blogsearch.exception.HttpInternalServerErrorException
 import jongho.blog.blogsearch.kakao.KakaoBlogSearchRequest
-import jongho.blog.blogsearch.searchlog.BlogSearchKeywordLogRepository
+import jongho.blog.blogsearch.entity.searchlog.BlogSearchKeywordLogRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.http.ResponseEntity
@@ -91,7 +91,15 @@ class BlogSearchService  (
 
         // In-memory database 조회 실패 시, Kakao Blog Search API 조회
         try {
-            return KakaoBlogSearchRequest().searchBlogsByKeyword(query, sort, page, size)
+            val kakaoResult = KakaoBlogSearchRequest().searchBlogsByKeyword(query, sort, page, size)
+
+            println("Kakao Result")
+            println(" - totalCount: ${kakaoResult.totalCount}")
+            println(" - pageableCount: ${kakaoResult.pageableCount}")
+            println(" - isEnd: ${kakaoResult.isEnd}")
+            println(" - documents: ${kakaoResult.documents}")
+
+            return kakaoResult
         }
         catch (ex: Exception) {
             Unit   // Kakao Blog Search Server 장애가 있을 경우 일단 대안 수행: Naver Blog Search API 조회

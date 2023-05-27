@@ -5,7 +5,7 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.longs.shouldBeGreaterThanOrEqual
 import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
-import jongho.blog.blogsearch.searchlog.BlogSearchKeywordLogRepository
+import jongho.blog.blogsearch.entity.searchlog.BlogSearchKeywordLogRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest

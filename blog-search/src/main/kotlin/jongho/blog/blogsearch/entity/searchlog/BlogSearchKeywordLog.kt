@@ -1,4 +1,4 @@
-package jongho.blog.blogsearch.searchlog
+package jongho.blog.blogsearch.entity.searchlog
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
