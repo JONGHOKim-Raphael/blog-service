@@ -4,13 +4,14 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
 import org.junit.jupiter.api.extension.ExtendWith
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.test.context.junit.jupiter.SpringExtension
 
 @ExtendWith(SpringExtension::class)
-class BlogSearchServiceTest : FunSpec({
-
-    val service = BlogSearchService()
+class BlogSearchServiceTest (
+    @Autowired val service: BlogSearchService
+) : FunSpec({
 
     test("잘못된 size 로 블로그 검색 요청할 때") {
         val query = "집짓기"

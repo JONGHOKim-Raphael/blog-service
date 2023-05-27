@@ -1,5 +1,5 @@
 dependencies {
-    val springbootVersion = "2.7.9"
+    val springbootVersion = "3.1.0"
     implementation("org.springframework.boot:spring-boot-starter:${springbootVersion}")
 
     val springdocVersion = "1.6.15"

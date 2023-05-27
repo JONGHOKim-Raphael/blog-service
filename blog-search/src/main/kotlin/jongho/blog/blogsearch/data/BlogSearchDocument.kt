@@ -1,7 +1,5 @@
 package jongho.blog.blogsearch.data
 
-import java.time.OffsetDateTime
-
 data class BlogSearchDocument (
     val title: String,
     val content: String,

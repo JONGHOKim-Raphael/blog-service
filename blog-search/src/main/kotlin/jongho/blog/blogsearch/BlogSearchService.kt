@@ -15,7 +15,9 @@ import jongho.blog.blogsearch.data.emptyBlogSearchResult
 import jongho.blog.blogsearch.exception.HttpBadRequestException
 import jongho.blog.blogsearch.exception.HttpInternalServerErrorException
 import jongho.blog.blogsearch.kakao.KakaoBlogSearchService
-
+import jongho.blog.blogsearch.searchlog.BlogSearchKeywordLogRepository
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.context.annotation.ComponentScan
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.bind.annotation.RequestMapping
@@ -24,11 +26,14 @@ import org.springframework.web.bind.annotation.RequestParam
 
 private val log : Logger = LoggerFactory.getLogger(BlogSearchService::class.java)
 
+@ComponentScan("jongho.blog.blogsearch")
 @Tag(name = "블로그 검색")
 @RestController
 @RequestMapping("v1/blog")
-class BlogSearchService : BlogSearchApi {
-
+class BlogSearchService  (
+    @Autowired val blogSearchKeywordLog: BlogSearchKeywordLogRepository
+) : BlogSearchApi
+{
     @Operation(summary = "블로그 검색", description = "키워드를 이용해 블로그를 검색합니다.")
     @GetMapping("/search")
     fun showBlogsByKeyword(
@@ -79,7 +84,8 @@ class BlogSearchService : BlogSearchApi {
 
     override fun searchBlogsByKeyword(query: String, sort: BlogSortMethod, page: Int, size: Int) : BlogSearchResult {
 
-        // TODO: keyword 검색 기록 저장
+        // keyword 검색된 횟수 증가 (+1)
+        blogSearchKeywordLog.increaseCount(query)
 
         // TODO: "in-memory database 조회"
 

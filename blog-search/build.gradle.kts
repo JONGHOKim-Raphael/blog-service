@@ -1,5 +1,5 @@
 dependencies {
-    val springbootVersion = "2.7.9"
+    val springbootVersion = "3.1.0"
     implementation("org.springframework.boot:spring-boot-starter:${springbootVersion}")
     implementation("org.springframework.boot:spring-boot-starter-web:${springbootVersion}")
     implementation("org.springframework.boot:spring-boot-starter-webflux:${springbootVersion}")
@@ -30,12 +30,22 @@ dependencies {
     testImplementation("org.mock-server:mockserver-core:${mockserverVersion}")
     testImplementation("org.mock-server:mockserver-client-java:${mockserverVersion}")
 
-    val springdocVersion = "1.6.15"
-    implementation("org.springdoc:springdoc-openapi-ui:${springdocVersion}")
+    val springdocVersion = "2.1.0"
+    implementation("org.springdoc:springdoc-openapi-starter-common:${springdocVersion}")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:${springdocVersion}")
 
     // in order to import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
     // SEE: - https://github.com/FasterXML/jackson-module-kotlin
     //      - https://docs.spring.io/spring-boot/docs/2.7.9/reference/html/dependency-versions.html
     val jacksonKotlinModuleVersion = "2.13.5"   // Spring Boot 2.7.9 uses Jackson 2.13.5
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:${jacksonKotlinModuleVersion}")
+
+    // QueryDSL
+    //  - https://l4279625.tistory.com/146
+    val querydslVersion = "5.0.0"
+    implementation("com.querydsl:querydsl-jpa:${querydslVersion}:jakarta")
+    kapt("com.querydsl:querydsl-apt:${querydslVersion}:jakarta")
+    kapt("org.springframework.boot:spring-boot-configuration-processor")
+    annotationProcessor("jakarta.persistence:jakarta.persistence-api")
+    annotationProcessor("jakarta.annotation:jakarta.annotation-api")
 }
