@@ -3,14 +3,11 @@ package jongho.blog.blogsearch
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
-import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.HttpStatus
-import org.springframework.test.context.junit.jupiter.SpringExtension
 
 @SpringBootTest
-@ExtendWith(SpringExtension::class)
 class BlogSearchServiceTest (
     @Autowired val service: BlogSearchService
 ) : FunSpec({
