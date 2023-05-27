@@ -9,12 +9,12 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
-import jongho.blog.blogsearch.data.BlogSearchResult
-import jongho.blog.blogsearch.data.BlogSortMethod
-import jongho.blog.blogsearch.data.emptyBlogSearchResult
+import jongho.blog.blogsearch.dto.BlogSearchResult
+import jongho.blog.blogsearch.dto.BlogSortMethod
+import jongho.blog.blogsearch.dto.emptyBlogSearchResult
 import jongho.blog.blogsearch.exception.HttpBadRequestException
 import jongho.blog.blogsearch.exception.HttpInternalServerErrorException
-import jongho.blog.blogsearch.kakao.KakaoBlogSearchService
+import jongho.blog.blogsearch.kakao.KakaoBlogSearchRequest
 import jongho.blog.blogsearch.searchlog.BlogSearchKeywordLogRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.ComponentScan
@@ -91,7 +91,7 @@ class BlogSearchService  (
 
         // In-memory database 조회 실패 시, Kakao Blog Search API 조회
         try {
-            return KakaoBlogSearchService().searchBlogsByKeyword(query, sort, page, size)
+            return KakaoBlogSearchRequest().searchBlogsByKeyword(query, sort, page, size)
         }
         catch (ex: Exception) {
             Unit   // Kakao Blog Search Server 장애가 있을 경우 일단 대안 수행: Naver Blog Search API 조회

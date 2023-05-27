@@ -1,4 +1,4 @@
-package jongho.blog.blogsearch.data
+package jongho.blog.blogsearch.dto
 
 import com.fasterxml.jackson.annotation.JsonProperty
 

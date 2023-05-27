@@ -1,4 +1,4 @@
-package jongho.blog.blogsearch.data
+package jongho.blog.blogsearch.dto
 
 data class BlogSearchDocument (
     val title: String,

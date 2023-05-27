@@ -1,4 +1,4 @@
-package jongho.blog.blogsearch.data
+package jongho.blog.blogsearch.dto
 
 val emptyBlogSearchResult = BlogSearchResult(totalCount = 0, pageableCount = 0, isEnd = true, documents = listOf())
 data class BlogSearchResult (

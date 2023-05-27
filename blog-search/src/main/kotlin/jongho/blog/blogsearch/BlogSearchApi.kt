@@ -1,7 +1,7 @@
 package jongho.blog.blogsearch
 
-import jongho.blog.blogsearch.data.BlogSearchResult
-import jongho.blog.blogsearch.data.BlogSortMethod
+import jongho.blog.blogsearch.dto.BlogSearchResult
+import jongho.blog.blogsearch.dto.BlogSortMethod
 
 val defaultBlogSortMethod = BlogSortMethod.ACCURACY
 const val defaultBlogSortMethodToString = "ACCURACY"

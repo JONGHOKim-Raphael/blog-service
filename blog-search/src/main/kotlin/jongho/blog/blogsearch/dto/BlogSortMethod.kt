@@ -4,7 +4,7 @@
  *   If you use primitive type parameter, the `@RequestParam` will automatically convert string value to your primitive type.
  *   Else, you should implement converter using `org.springframework.core.convert.converter.Converter`.
  */
-package jongho.blog.blogsearch.data
+package jongho.blog.blogsearch.dto
 
 import jongho.blog.blogsearch.defaultBlogSortMethod
 import org.springframework.context.annotation.Configuration

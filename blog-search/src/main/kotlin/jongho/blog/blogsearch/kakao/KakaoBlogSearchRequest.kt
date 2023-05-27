@@ -3,11 +3,11 @@ package jongho.blog.blogsearch.kakao
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import jongho.blog.blogsearch.BlogSearchApi
-import jongho.blog.blogsearch.data.BlogSortMethod
+import jongho.blog.blogsearch.dto.BlogSortMethod
 import io.netty.handler.logging.LogLevel
-import jongho.blog.blogsearch.data.BlogSearchResult
-import jongho.blog.blogsearch.data.KakaoBlogSearchResult
-import jongho.blog.blogsearch.data.emptyBlogSearchResult
+import jongho.blog.blogsearch.dto.BlogSearchResult
+import jongho.blog.blogsearch.dto.KakaoBlogSearchResult
+import jongho.blog.blogsearch.dto.emptyBlogSearchResult
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpHeaders
@@ -26,16 +26,16 @@ import reactor.netty.transport.logging.AdvancedByteBufFormat
 private val kakaoBlogSearchUri = "https://dapi.kakao.com/v2/search/blog"
 private val kakaoRestApiKey = "KakaoAK 429f206db1aa4df9c85cae6171fc5423" // TODO: Encrypt this key, read the encrypted key, and use the decrypted key
 private val httpClientConnector: ClientHttpConnector   // HTTP 통신들을 logging 하기 위함.
-        = ReactorClientHttpConnector(HttpClient.create().wiretap(KakaoBlogSearchService::class.java.canonicalName, LogLevel.DEBUG, AdvancedByteBufFormat.TEXTUAL))
+        = ReactorClientHttpConnector(HttpClient.create().wiretap(KakaoBlogSearchRequest::class.java.canonicalName, LogLevel.DEBUG, AdvancedByteBufFormat.TEXTUAL))
 private val defaultKakaoClient: WebClient = WebClient.builder()
     .clientConnector(httpClientConnector)
     .baseUrl(kakaoBlogSearchUri)
     .defaultHeader(HttpHeaders.AUTHORIZATION, kakaoRestApiKey)
     .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     .build()
-private val log: Logger = LoggerFactory.getLogger(KakaoBlogSearchService::class.java)
+private val log: Logger = LoggerFactory.getLogger(KakaoBlogSearchRequest::class.java)
 
-class KakaoBlogSearchService(
+class KakaoBlogSearchRequest(
     private var _kakaoClient: WebClient = defaultKakaoClient
 ) : BlogSearchApi {
 

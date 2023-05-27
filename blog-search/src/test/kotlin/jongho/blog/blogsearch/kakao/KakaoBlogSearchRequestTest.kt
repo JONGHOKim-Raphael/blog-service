@@ -5,7 +5,7 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.ints.shouldBeGreaterThanOrEqual
 import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldNotBe
-import jongho.blog.blogsearch.data.BlogSearchResult
+import jongho.blog.blogsearch.dto.BlogSearchResult
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
@@ -26,14 +26,14 @@ private val kakaoClientToWrongServer: WebClient = WebClient.builder()
     .build()
 
 @ExtendWith(SpringExtension::class)
-class KakaoBlogSearchServiceTest : BehaviorSpec({
+class KakaoBlogSearchRequestTest : BehaviorSpec({
 
     Given("실제 카카오 블로그 검색 서버에 요청했을 때 ") {
-        val kakaoBlogSearchService = KakaoBlogSearchService()
+        val kakaoBlogSearchRequest = KakaoBlogSearchRequest()
 
         When("*집짓기* 라는 키워드로 블로그 검색했다면") {
             val query = "집짓기"
-            val response : BlogSearchResult = kakaoBlogSearchService.searchBlogsByKeyword(query)
+            val response : BlogSearchResult = kakaoBlogSearchRequest.searchBlogsByKeyword(query)
 
             Then("null 이 아닌 결과를 반환해야 함.") {
                 response.shouldNotBeNull()   // assertion & smart-casting 한 번에 해결
@@ -47,7 +47,7 @@ class KakaoBlogSearchServiceTest : BehaviorSpec({
     }
 
     Given("존재하지 않을법한 카카오 서버에 요청했을 때") {
-        val serviceToWrongServer = KakaoBlogSearchService(kakaoClientToWrongServer)
+        val serviceToWrongServer = KakaoBlogSearchRequest(kakaoClientToWrongServer)
 
         When("똑같이 *집짓기* 라는 키워드로 검색 요청하면") {
             val query = "집짓기"
