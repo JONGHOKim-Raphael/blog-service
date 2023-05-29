@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.client.reactive.ClientHttpConnector
 import org.springframework.http.client.reactive.ReactorClientHttpConnector
+import org.springframework.stereotype.Component
 import org.springframework.util.LinkedMultiValueMap
 import org.springframework.util.MultiValueMap
 import org.springframework.web.reactive.function.BodyInserters
@@ -35,6 +36,7 @@ private val defaultKakaoClient: WebClient = WebClient.builder()
     .build()
 private val log: Logger = LoggerFactory.getLogger(KakaoBlogSearchRequest::class.java)
 
+@Component
 class KakaoBlogSearchRequest(
     private var _kakaoClient: WebClient = defaultKakaoClient
 ) : BlogSearchRequestApi {

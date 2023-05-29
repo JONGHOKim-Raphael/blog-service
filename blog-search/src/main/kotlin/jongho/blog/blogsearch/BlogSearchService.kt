@@ -31,7 +31,8 @@ private val log : Logger = LoggerFactory.getLogger(BlogSearchService::class.java
 @RestController
 @RequestMapping("v1/blog")
 class BlogSearchService  (
-    @Autowired val blogSearchKeywordLog: BlogSearchKeywordLogRepository
+    val blogSearchKeywordLog: BlogSearchKeywordLogRepository,
+    val kakao: KakaoBlogSearchRequest
 )
 {
     @Operation(summary = "블로그 검색", description = "키워드를 이용해 블로그를 검색합니다.")
@@ -91,7 +92,7 @@ class BlogSearchService  (
 
         // In-memory database 조회 실패 시, Kakao Blog Search API 조회
         try {
-            return KakaoBlogSearchRequest().searchBlogsByKeyword(query, sort, page, size)
+            return kakao.searchBlogsByKeyword(query, sort, page, size)
         }
         catch (ex: Exception) {
             Unit   // Kakao Blog Search Server 장애가 있을 경우 일단 대안 수행: Naver Blog Search API 조회
