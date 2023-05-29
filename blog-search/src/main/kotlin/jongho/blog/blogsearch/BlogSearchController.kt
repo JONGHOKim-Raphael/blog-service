@@ -12,7 +12,6 @@ import io.swagger.v3.oas.annotations.tags.Tag
 import jongho.blog.blogsearch.dto.BlogSortMethod
 import jongho.blog.blogsearch.dto.emptyBlogSearchResult
 import jongho.blog.blogsearch.exception.HttpBadRequestException
-import jongho.blog.blogsearch.searchlog.BlogSearchKeywordLogRepository
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RestController
@@ -27,7 +26,6 @@ private val log : Logger = LoggerFactory.getLogger(BlogSearchController::class.j
 @RestController
 @RequestMapping("v1/blog")
 class BlogSearchController  (
-    val blogSearchKeywordLog: BlogSearchKeywordLogRepository,
     val service: BlogSearchService,
 ) {
     @Operation(summary = "블로그 검색", description = "키워드를 이용해 블로그를 검색합니다.")
