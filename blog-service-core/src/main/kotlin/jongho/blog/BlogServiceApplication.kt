@@ -1,12 +1,12 @@
-package jongho.blog.blogsearch
+package jongho.blog
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class BlogSearchApplication
+class BlogServiceApplication
 
 fun main(args: Array<String>) {
-    println("--- Hello, BLOG-SEARCH !!! ---")
-    runApplication<BlogSearchApplication>(*args)
+    println("---HELLO, BLOG-SERVICE !!!---")
+    runApplication<BlogServiceApplication>(*args)
 }

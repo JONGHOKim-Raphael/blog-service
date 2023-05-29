@@ -53,7 +53,7 @@ subprojects {
 }
 
 rootProject.springBoot {
-    mainClass.set("jongho.blog.blogservice.BlogServiceApplicationKt")
+    mainClass.set("jongho.blog.BlogServiceApplicationKt")
 }
 
 rootProject.dependencies {
@@ -63,12 +63,12 @@ rootProject.dependencies {
 
 project(":blog-service-core") {
     springBoot {
-        mainClass.set("jongho.blog.blogservice.BlogServiceApplicationKt")
+        mainClass.set("jongho.blog.BlogServiceApplicationKt")
     }
 }
 
 project(":blog-search") {
     springBoot {
-        mainClass.set("jongho.blog.blogsearch.BlogSearchApplicationKt")
+        mainClass.set("jongho.blog.BlogServiceApplicationKt")
     }
 }
