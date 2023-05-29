@@ -6,13 +6,14 @@
 package jongho.blog.blogsearch.searchlog
 
 import com.querydsl.jpa.impl.JPAQueryFactory
-import jakarta.persistence.EntityManager
-import jakarta.persistence.PersistenceContext
 import org.springframework.beans.factory.annotation.Autowired
+import mu.KotlinLogging
 
 // QueryDSL
 import jongho.blog.blogsearch.searchlog.QBlogSearchKeywordLog
 import org.springframework.transaction.annotation.Transactional
+
+private val log = KotlinLogging.logger {}
 
 @Transactional
 class BlogSearchKeywordLogCustomRepositoryImpl (
@@ -27,7 +28,7 @@ class BlogSearchKeywordLogCustomRepositoryImpl (
             .fetchOne()
 
         if (result == null) {
-            println("Hello, result == null")
+            log.debug { "Hello, result == null" }
             jpaQueryFactory
                 .insert(qKeywordLog)
                 .columns(qKeywordLog.keyword, qKeywordLog.count)
