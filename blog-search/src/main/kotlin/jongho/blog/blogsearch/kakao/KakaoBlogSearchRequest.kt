@@ -2,7 +2,7 @@ package jongho.blog.blogsearch.kakao
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
-import jongho.blog.blogsearch.BlogSearchApi
+import jongho.blog.blogsearch.BlogSearchRequestApi
 import jongho.blog.blogsearch.dto.BlogSortMethod
 import io.netty.handler.logging.LogLevel
 import jongho.blog.blogsearch.dto.BlogSearchResult
@@ -37,7 +37,7 @@ private val log: Logger = LoggerFactory.getLogger(KakaoBlogSearchRequest::class.
 
 class KakaoBlogSearchRequest(
     private var _kakaoClient: WebClient = defaultKakaoClient
-) : BlogSearchApi {
+) : BlogSearchRequestApi {
 
     fun KakaoBlogSearchService(kakaoClient: WebClient) {
         _kakaoClient = kakaoClient

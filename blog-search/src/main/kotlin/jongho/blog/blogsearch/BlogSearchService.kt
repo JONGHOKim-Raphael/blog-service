@@ -32,7 +32,7 @@ private val log : Logger = LoggerFactory.getLogger(BlogSearchService::class.java
 @RequestMapping("v1/blog")
 class BlogSearchService  (
     @Autowired val blogSearchKeywordLog: BlogSearchKeywordLogRepository
-) : BlogSearchApi
+)
 {
     @Operation(summary = "블로그 검색", description = "키워드를 이용해 블로그를 검색합니다.")
     @GetMapping("/search")
@@ -82,7 +82,7 @@ class BlogSearchService  (
         return showBlogsByKeyword(query, defaultBlogSortMethod, defaultPageNumber, pageSize)
     }
 
-    override fun searchBlogsByKeyword(query: String, sort: BlogSortMethod, page: Int, size: Int) : BlogSearchResult {
+    fun searchBlogsByKeyword(query: String, sort: BlogSortMethod, page: Int, size: Int) : BlogSearchResult {
 
         // keyword 검색된 횟수 증가 (+1)
         blogSearchKeywordLog.increaseCount(query)
