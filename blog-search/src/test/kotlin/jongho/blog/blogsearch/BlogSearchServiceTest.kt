@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus
 
 @SpringBootTest
 class BlogSearchServiceTest (
-    @Autowired val service: BlogSearchService
+    @Autowired val service: BlogSearchController
 ) : FunSpec({
 
     test("잘못된 size 로 블로그 검색 요청할 때") {

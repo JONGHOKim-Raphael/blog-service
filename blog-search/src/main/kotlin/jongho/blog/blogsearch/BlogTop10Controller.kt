@@ -12,7 +12,7 @@ import kotlin.text.StringBuilder
 @Tag(name = "블로그 검색")
 @RestController
 @RequestMapping("v1/blog")
-class BlogTop10Service (
+class BlogTop10Controller (
     @Autowired val keywordLog: BlogSearchKeywordLogRepository
 )
 {
